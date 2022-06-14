@@ -12,7 +12,7 @@ describe('local-book-shoppe routes', () => {
 
   it('should return a list of books', async () => {
     const res = await request(app).get('/books');
-    const lotr = res.body.find((char) => char.id === '1');
+    const lotr = res.body.find((char) => char.book_id === '1');
     expect(lotr).toHaveProperty('title', 'Lord of the Rings');
     expect(lotr).toHaveProperty('released', 1922);
   });
