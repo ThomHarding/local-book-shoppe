@@ -3,8 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-const Book = require('../lib/models/Book');
-
 describe('local-book-shoppe routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -39,7 +37,6 @@ describe('local-book-shoppe routes', () => {
 
   it('POST /books should create a new book', async () => {
     const resp = await request(app).post('/books').send({ title: 'The Dark Tower', released: '2014' });
-    console.log(resp.status);
     expect(resp.status).toBe(200);
     expect(resp.body.title).toBe('The Dark Tower');
   });
@@ -53,6 +50,60 @@ describe('local-book-shoppe routes', () => {
 
     const { body: newBook } = await request(app).get(`/books/${resp.body.id}`);
     expect(newBook.authors.length).toBe(2);
+  });
+
+  
+  it('/authors should return a list of authors', async () => {
+    const resp = await request(app).get('/authors');
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual([
+      { id: '1',
+        name: 'J.R.R. Tolkien'
+      },
+      { id: '2',
+        name: 'George Orwell'
+      },
+    ]);
+  });
+
+  it('/authors/:id should return author detail', async () => {
+    const res = await request(app).get('/authors/1');
+    const tolkien = {
+      author_id: 1, 
+      name: 'J.R.R. Tolkien',
+      dob: '1892-01-03',
+      pob: 'Bloemfontein, Orange Free State',
+      books: [
+        {
+          id: '1',
+          title: 'Lord of the Rings',
+          released: 1922
+        },
+        {
+          id: '13',
+          title: 'Big Lordther',
+          released: 2022
+        }
+      ],
+    };
+    expect(res.body).toEqual(tolkien);
+  });
+
+  it('POST /authors should create a new author', async () => {
+    const resp = await request(app).post('/authors').send({ name: 'You, reading this', dob: 'Jun 14 2022', pob: 'Alchemy Code Lab' });
+    expect(resp.status).toBe(200);
+    expect(resp.body.name).toBe('You, reading this');
+  });
+
+  it('POST /authors should create a new author with an associated book', async () => {
+    const resp = await request(app)
+      .post('/authors')
+      .send({ name: 'Geoffrey Chaucer', dob: 'Sep 10 1340', bookIds: [1, 2] });
+    expect(resp.status).toBe(200);
+    expect(resp.body.name).toBe('Geoffrey Chaucer');
+
+    const { body: newAuthor } = await request(app).get(`/authors/${resp.body.id}`);
+    expect(newAuthor.authors.length).toBe(2);
   });
 
   afterAll(() => {
