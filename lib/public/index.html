@@ -52,6 +52,36 @@ curl -d '{"name":"Ruby", "age": 11, "favoriteTreat": "Tuna"}' -H 'Content-Type: 
               >
             </td>
           </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/authors</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">Gets a list of authors</td>
+            <td class="table-cell p-3">
+              <a href="/authors" target="_blank" class="text-blue-700"
+                >List Authors</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/authors/:id</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">Gets an author</td>
+            <td class="table-cell p-3">
+              <a href="/authors/1" target="_blank" class="text-blue-700"
+                >Get Author 1</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/authors</pre></td>
+            <td class="table-cell p-3 text-center">POST</td>
+            <td class="table-cell p-3">Add an author</td>
+            <td class="table-cell p-3">
+              <pre class="whitespace-normal text-xs">
+curl -d '{"name":"Ruby", "age": 11, "favoriteTreat": "Tuna"}' -H 'Content-Type: application/json' 'https://alchemy-book-shoppe.herokuapp.com/books'</pre
+              >
+            </td>
+          </tr>
         </tbody>
       </table>
     </main>
