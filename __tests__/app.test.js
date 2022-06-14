@@ -69,20 +69,15 @@ describe('local-book-shoppe routes', () => {
   it('/authors/:id should return author detail', async () => {
     const res = await request(app).get('/authors/1');
     const tolkien = {
-      author_id: 1, 
+      id: '1', 
       name: 'J.R.R. Tolkien',
-      dob: '1892-01-03',
+      dob: '1892-01-03T07:00:00.000Z',
       pob: 'Bloemfontein, Orange Free State',
       books: [
         {
-          id: '1',
+          book_id: 1,
           title: 'Lord of the Rings',
           released: 1922
-        },
-        {
-          id: '13',
-          title: 'Big Lordther',
-          released: 2022
         }
       ],
     };
