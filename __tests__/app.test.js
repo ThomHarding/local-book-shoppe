@@ -3,7 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-const { Book } = require('../lib/models/Book');
+const Book = require('../lib/models/Book');
 
 describe('local-book-shoppe routes', () => {
   beforeEach(() => {
