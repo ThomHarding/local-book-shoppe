@@ -71,7 +71,7 @@ describe('local-book-shoppe routes', () => {
     const tolkien = {
       id: '1', 
       name: 'J.R.R. Tolkien',
-      dob: '1892-01-03T07:00:00.000Z',
+      dob: '1892-01-03T00:00:00.000Z',
       pob: 'Bloemfontein, Orange Free State',
       books: [
         {
