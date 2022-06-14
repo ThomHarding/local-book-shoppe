@@ -10,11 +10,13 @@ describe('local-book-shoppe routes', () => {
     return setup(pool);
   });
 
-  it('should return a list of books', async () => {
-    const res = await request(app).get('/books');
-    const lotr = res.body.find((char) => char.book_id === '1');
-    expect(lotr).toHaveProperty('title', 'Lord of the Rings');
-    expect(lotr).toHaveProperty('released', 1922);
+  it('/books should return a list of books', async () => {
+    const resp = await request(app).get('/books');
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual([
+      { id: '1', title: 'Lord of the Rings', released: 1922 },
+      { id: '2', title: 'Animal Farm', released: 1945 },
+    ]);
   });
 
   it('/books/:id should return book detail', async () => {
