@@ -32,7 +32,8 @@ INSERT INTO authors (
   pob
 )
 VALUES 
-  ('J.R.R. Tolkien', 'Sun Jan 03 1892', 'Bloemfontein, Orange Free State')
+  ('J.R.R. Tolkien', 'Sun Jan 03 1892', 'Bloemfontein, Orange Free State'),
+  ('George Orwell', 'Thu Jun 25 1903', 'Motihari, Bengal Presidency')
 ;
 
 INSERT INTO books(
@@ -40,7 +41,8 @@ INSERT INTO books(
   released
 )
 VALUES
-  ('Lord of the Rings', 1922)
+  ('Lord of the Rings', 1922),
+  ('Animal Farm', 1945)
   ;
 
 INSERT INTO author_books (
@@ -48,5 +50,6 @@ INSERT INTO author_books (
     book_id
 )
 VALUES
-  (1, 1)
+  (1, 1),
+  (2, 2)
 ;
