@@ -37,16 +37,22 @@ describe('local-book-shoppe routes', () => {
     expect(res.body).toEqual(lotr);
   });
 
-  it.skip('should add a new book', async () => {
-    const book = new Book({
-      title: 'The Silmarillion',
-      released: 1977
-    });
-    const res = await request(app).post('/books').send(book);
-    expect(res.body.title).toEqual(book.title);
-    expect(res.body.released).toEqual(book.released);
-    const count = await book.count();
-    expect(count).toEqual(2);
+  it('POST /books should create a new book', async () => {
+    const resp = await request(app).post('/books').send({ title: 'The Dark Tower', released: '2014' });
+    console.log(resp.status);
+    expect(resp.status).toBe(200);
+    expect(resp.body.title).toBe('The Dark Tower');
+  });
+
+  it('POST /books should create a new book with an associated Author', async () => {
+    const resp = await request(app)
+      .post('/books')
+      .send({ title: 'Big Lordther', released: 2022, authorIds: [1, 2] });
+    expect(resp.status).toBe(200);
+    expect(resp.body.title).toBe('Big Lordther');
+
+    const { body: newBook } = await request(app).get(`/books/${resp.body.id}`);
+    expect(newBook.authors.length).toBe(2);
   });
 
   afterAll(() => {
