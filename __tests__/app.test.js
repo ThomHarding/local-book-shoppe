@@ -96,9 +96,8 @@ describe('local-book-shoppe routes', () => {
       .send({ name: 'Geoffrey Chaucer', dob: 'Sep 10 1340', pob: 'London', bookIds: [1, 2] });
     expect(resp.status).toBe(200);
     expect(resp.body.name).toBe('Geoffrey Chaucer');
-
     const { body: newAuthor } = await request(app).get(`/authors/${resp.body.id}`);
-    expect(newAuthor.books.length).toBe(3);
+    expect(newAuthor.books.length).toBe(2);
   });
 
   afterAll(() => {
